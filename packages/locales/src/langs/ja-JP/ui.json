@@ -1,0 +1,81 @@
+{
+  "formRules": {
+    "required": "を入力してください",
+    "selectRequired": "を選択してください"
+  },
+  "placeholder": {
+    "input": "入力してください",
+    "select": "選択してください"
+  },
+  "captcha": {
+    "title": "セキュリティ検証を完了してください",
+    "sliderSuccessText": "検証に合格しました",
+    "sliderDefaultText": "スライダを押したままドラッグしてください",
+    "sliderRotateDefaultTip": "画像をクリックして更新",
+    "sliderRotateFailTip": "検証に失敗しました",
+    "sliderRotateSuccessTip": "検証に成功し、{0}秒かかりました",
+    "alt": "imgタグsrc属性値のサポート",
+    "refreshAriaLabel": "認証コードの更新",
+    "confirmAriaLabel": "選択の確認",
+    "confirm": "確認",
+    "pointAriaLabel": "クリックポイント",
+    "clickInOrder": "クリックしてください"
+  },
+  "iconPicker": {
+    "placeholder": "アイコンを選択",
+    "search": "アイコンを検索..."
+  },
+  "fallback": {
+    "pageNotFound": "あら！ページが見つかりません",
+    "pageNotFoundDesc": "申し訳ありませんが、お探しのページを見つけることができません。",
+    "forbidden": "あら！アクセスが拒否されました",
+    "forbiddenDesc": "申し訳ありませんが、このページにアクセスする権限はありません。",
+    "internalError": "あら！エラー",
+    "internalErrorDesc": "申し訳ありませんが、サーバでエラーが発生しました。",
+    "offline": "オフラインページ",
+    "offlineError": "あら！ネットワークエラー",
+    "offlineErrorDesc": "申し訳ありませんが、インターネットに接続できません。ネットワーク接続を確認して再試行してください。",
+    "comingSoon": "近日発売",
+    "http": {
+      "requestTimeout": "要求がタイムアウトしました。後で再試行してください。",
+      "networkError": "ネットワーク異常。ネットワーク接続を確認してから再試行してください。",
+      "badRequest": "要求エラー。入力を確認して再試行してください。",
+      "unauthorized": "ログイン認証の有効期限が切れました。再ログインしてから続けてください。",
+      "forbidden": "このリソースにアクセスする権限がありません。",
+      "notFound": "見つかりませんでした。要求されたリソースは存在しません。",
+      "internalServerError": "内部サーバーエラーです。後で再試行してください。"
+    }
+  },
+  "widgets": {
+    "document": "ドキュメント",
+    "qa": "質問&ヘルプ",
+    "setting": "設定＃セッテイ＃",
+    "logoutTip": "ログインを終了しますか？",
+    "viewAll": "すべてのメッセージの表示",
+    "notifications": "に知らせる",
+    "markAllAsRead": "すべて既読としてマーク",
+    "clearNotifications": "クリアランス",
+    "checkUpdatesTitle": "新しいバージョンが使用可能",
+    "checkUpdatesDescription": "更新をクリックして最新バージョンを取得",
+    "search": {
+      "title": "検索けんさく",
+      "searchNavigate": "検索ナビゲーションメニュー",
+      "select": "せんたく",
+      "navigate": "ナビゲーション",
+      "close": "閉じる",
+      "noResults": "検索結果が見つかりません",
+      "noRecent": "検索履歴がありません",
+      "recent": "検索履歴"
+    },
+    "lockScreen": {
+      "title": "画面をロック",
+      "screenButton": "ロック＃ロック＃",
+      "password": "パスワード",
+      "placeholder": "スクリーンロックパスワードを入力してください",
+      "unlock": "ロック解除をクリック",
+      "errorPasswordTip": "パスワードが間違っています。再入力してください",
+      "backToLogin": "ログインに戻る",
+      "entry": "システムに入る"
+    }
+  }
+}

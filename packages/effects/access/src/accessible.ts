@@ -1,20 +1,20 @@
 import type {
   AccessModeType,
   GenerateMenuAndRoutesOptions,
-  RouteRecordRaw,
-} from '@vben/types';
+  RouteRecordRaw
+} from "@vben/types";
 
 import {
   cloneDeep,
   generateMenus,
   generateRoutesByBackend,
   generateRoutesByFrontend,
-  mapTree,
-} from '@vben/utils';
+  mapTree
+} from "@vben/utils";
 
 async function generateAccessible(
   mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
+  options: GenerateMenuAndRoutesOptions
 ) {
   const { router } = options;
 
@@ -22,16 +22,16 @@ async function generateAccessible(
   // 生成路由
   const accessibleRoutes = await generateRoutes(mode, options);
 
-  const root = router.getRoutes().find((item) => item.path === '/');
+  const root = router.getRoutes().find((item) => item.path === "/");
 
   // 动态添加到router实例内
   accessibleRoutes.forEach((route) => {
     if (root && !route.meta?.noBasicLayout) {
       // 为了兼容之前的版本用法，如果包含子路由，则将component移除，以免出现多层BasicLayout
       // 如果你的项目已经跟进了本次修改，移除了所有自定义菜单首级的BasicLayout，可以将这段if代码删除
-      if (route.children && route.children.length > 0) {
-        delete route.component;
-      }
+      // if (route.children && route.children.length > 0) {
+      //   delete route.component;
+      // }
       root.children?.push(route);
     } else {
       router.addRoute(route);
@@ -58,21 +58,23 @@ async function generateAccessible(
  */
 async function generateRoutes(
   mode: AccessModeType,
-  options: GenerateMenuAndRoutesOptions,
+  options: GenerateMenuAndRoutesOptions
 ) {
   const { forbiddenComponent, roles, routes } = options;
 
   let resultRoutes: RouteRecordRaw[] = routes;
   switch (mode) {
-    case 'backend': {
-      resultRoutes = await generateRoutesByBackend(options);
+    case "backend": {
+      const backendResultRoutes = await generateRoutesByBackend(options);
+      const reSolveRoutes = backendConvertRoutes(backendResultRoutes);
+      resultRoutes = [...resultRoutes, ...reSolveRoutes];
       break;
     }
-    case 'frontend': {
+    case "frontend": {
       resultRoutes = await generateRoutesByFrontend(
         routes,
         roles || [],
-        forbiddenComponent,
+        forbiddenComponent
       );
       break;
     }
@@ -90,7 +92,7 @@ async function generateRoutes(
     const firstChild = route.children[0];
 
     // 如果子路由不是以/开头，则直接返回,这种情况需要计算全部父级的path才能得出正确的path，这里不做处理
-    if (!firstChild?.path || !firstChild.path.startsWith('/')) {
+    if (!firstChild?.path || !firstChild.path.startsWith("/")) {
       return route;
     }
 
@@ -99,6 +101,68 @@ async function generateRoutes(
   });
 
   return resultRoutes;
+}
+
+
+/**
+ * 对后端的路由参数进行递归拼接
+ */
+function backendConvertRoutes(apiRoutes: any) {
+
+  function capitalizeFirstLetter(str: any) {
+    if (str.length === 0) return str; // 处理空字符串
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  const formatRoute = (route: any) => {
+    return {
+      name: capitalizeFirstLetter(route.component_name) || capitalizeFirstLetter(route.web_path.split("/").pop()),
+      path: route.web_path,
+      component: route.component,
+      meta: {
+        icon: route.icon,
+        title: route.title,
+        //隐藏
+        hideInMenu: !route.visible,
+        //缓存
+        keepAlive: route.cache,
+        //外链
+        link: route.link_url || "",
+        //排序
+        order: route.sort,
+        // 其他 meta 字段可以根据需要添加 是否目录
+        is_catalog: route.is_catalog,
+        component_name: route.component_name,
+        web_path: route.web_path
+      },
+      children: [], // 初始化子路由
+      redirect: undefined // 设置 redirect
+    };
+  };
+
+  const routesMap = new Map();
+  const rootRoutes: any = []; // 用于存储所有根路由
+
+  apiRoutes.forEach((route: any) => {
+    // 创建格式化的路由
+    const formattedRoute = formatRoute(route);
+    routesMap.set(route.id, formattedRoute);
+    // 如果是根路由，添加到 rootRoutes
+    if (route.parent === null) {
+      rootRoutes.push(formattedRoute);
+    }
+  });
+
+  // 组织子路由
+  apiRoutes.forEach((route: any) => {
+    if (route.parent !== null) {
+      const parentRoute = routesMap.get(route.parent);
+      if (parentRoute) {
+        parentRoute.children.push(routesMap.get(route.id));
+      }
+    }
+  });
+  return rootRoutes;
 }
 
 export { generateAccessible };
