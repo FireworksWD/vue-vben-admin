@@ -1,0 +1,12 @@
+{
+  "title": "デモンストレーション",
+  "antd": "Ant Design Vue",
+  "vben": {
+    "title": "プロジェクト",
+    "about": "について",
+    "document": "ドキュメント",
+    "antdv": "Ant Design Vueバージョン",
+    "naive-ui": "Naive UIバージョン",
+    "element-plus": "Element Plusバージョン"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "login": "ログイン＃ログイン＃",
+    "register": "登録",
+    "codeLogin": "認証コードログイン",
+    "qrcodeLogin": "QRコードログイン",
+    "forgetPassword": "パスワードを忘れる"
+  },
+  "dashboard": {
+    "title": "概要",
+    "analytics": "分析ページ",
+    "workspace": "ワークベンチ"
+  },
+  "personal": {
+    "title": "パーソナルセンター"
+  },
+  "workspace": {
+    "todo": "保留中",
+    "project": "プロジェクト",
+    "team": "チーム"
+  }
+}

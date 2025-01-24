@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "login": "Đăng nhập",
+    "register": "Đăng ký",
+    "codeLogin": "Đăng nhập CAPTCHA",
+    "qrcodeLogin": "Mã QR Đăng nhập",
+    "forgetPassword": "Quên mật khẩu"
+  },
+  "dashboard": {
+    "title": "Tổng quan",
+    "analytics": "Trang phân tích",
+    "workspace": "Bàn làm việc"
+  },
+  "personal": {
+    "title": "Trung tâm cá nhân"
+  },
+  "workspace": {
+    "todo": "Việc cần làm",
+    "project": "Dự án",
+    "team": "Đội ngũ"
+  }
+}
