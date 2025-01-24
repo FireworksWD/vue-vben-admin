@@ -10,5 +10,6 @@ export const overridesPreferences = defineOverridesPreferences({
     name: import.meta.env.VITE_APP_TITLE,
     accessMode: 'backend',
     loginExpiredMode: 'modal',
+    layout: "header-mixed-nav"
   },
 });

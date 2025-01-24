@@ -238,7 +238,7 @@ async function handleReset() {
     <Drawer
       :description="$t('preferences.subtitle')"
       :title="$t('preferences.title')"
-      class="sm:max-w-sm"
+      class="sm:grid-cols-2"
     >
       <template #extra>
         <div class="flex items-center">
