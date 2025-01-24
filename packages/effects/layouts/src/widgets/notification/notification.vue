@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { NotificationItem } from './types';
 
+import { watch } from 'vue';
+
 import { Bell, MailCheck } from '@vben/icons';
 import { $t } from '@vben/locales';
 
@@ -33,6 +35,7 @@ withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{
   clear: [];
+  click: [];
   makeAll: [];
   read: [NotificationItem];
   viewAll: [];
@@ -60,6 +63,13 @@ function handleClear() {
 function handleClick(item: NotificationItem) {
   emit('read', item);
 }
+// 打开组件的方法
+watch(open, (newVal) => {
+  if (newVal) {
+    // 当组件打开时，触发 `click` 事件
+    emit('click');
+  }
+});
 </script>
 <template>
   <VbenPopover
@@ -112,9 +122,13 @@ function handleClick(item: NotificationItem) {
               </span>
               <div class="flex flex-col gap-1 leading-none">
                 <p class="font-semibold">{{ item.title }}</p>
-                <p class="text-muted-foreground my-1 line-clamp-2 text-xs">
-                  {{ item.message }}
-                </p>
+                <!--                <p class="text-muted-foreground my-1 line-clamp-2 text-xs">-->
+                <!--                  {{ item.message }}-->
+                <!--                </p>-->
+                <p
+                  class="text-muted-foreground my-1 line-clamp-2 text-xs"
+                  v-html="item.message"
+                ></p>
                 <p class="text-muted-foreground line-clamp-2 text-xs">
                   {{ item.date }}
                 </p>

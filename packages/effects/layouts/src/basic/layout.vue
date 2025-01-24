@@ -31,9 +31,17 @@ import {
   useMixedMenu,
 } from './menu';
 import { LayoutTabbar } from './tabbar';
+// 自定义logo和title
+interface IProps {
+  logoUrl: string | undefined;
+  webTitle: string;
+}
 
 defineOptions({ name: 'BasicLayout' });
-
+withDefaults(defineProps<IProps>(), {
+  logoUrl: preferences.logo.source,
+  webTitle: preferences.app.name,
+});
 const emit = defineEmits<{ clearPreferencesAndLogout: [] }>();
 
 const {
@@ -218,8 +226,8 @@ const headerSlots = computed(() => {
         v-if="preferences.logo.enable"
         :class="logoClass"
         :collapsed="logoCollapsed"
-        :src="preferences.logo.source"
-        :text="preferences.app.name"
+        :src="logoUrl"
+        :text="webTitle"
         :theme="showHeaderNav ? headerTheme : theme"
       />
     </template>
@@ -301,7 +309,7 @@ const headerSlots = computed(() => {
     <template #side-extra-title>
       <VbenLogo
         v-if="preferences.logo.enable"
-        :text="preferences.app.name"
+        :text="webTitle"
         :theme="theme"
       />
     </template>
