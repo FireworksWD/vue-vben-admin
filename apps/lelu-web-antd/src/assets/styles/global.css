@@ -1,0 +1,5 @@
+.fs-form-wrapper.fs-fullscreen.ant-modal .ant-modal-content {
+  height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+}
