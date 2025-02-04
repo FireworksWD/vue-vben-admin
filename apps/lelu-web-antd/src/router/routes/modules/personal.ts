@@ -5,7 +5,6 @@ import {BasicLayout} from "#/layouts";
 
 const routes: RouteRecordRaw[] = [
   {
-    component: BasicLayout,
     meta: {
       icon: 'lucide:layout-dashboard',
       order: -1,

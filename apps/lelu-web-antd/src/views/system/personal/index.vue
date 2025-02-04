@@ -32,7 +32,7 @@
                           style="margin-right: 5px"/>
                     {{ $t('system.N00522') }}:</span>&nbsp;
                   <a-tag :color="getRandomColor()">{{
-                      state.personalForm.dept_info.dept_name
+                      $t(state.personalForm.dept_info.dept_name)
                     }}
                   </a-tag>
                 </a-col>

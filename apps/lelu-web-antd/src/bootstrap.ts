@@ -22,7 +22,7 @@ async function bootstrap(namespace: string) {
   // 注册全局的 Icon 组件
   app.component('Icon', Icon);
   // 调用函数来注册本地图标集合
-  registerIcons();
+  await registerIcons();
 
   // 国际化 i18n 配置
   await setupI18n(app);
