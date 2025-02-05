@@ -244,8 +244,15 @@ const onExpand = (expandedKeys: any) => {
  */
 watch(checkedKeys, () => {
   XEUtils.eachTree(menuData.value, (item) => {
-    item.isCheck = checkedKeys?.value.includes(item.id);
+    const isSelected = checkedKeys?.value.includes(item.id);
+    if (item.children && item.children.length > 0) {
+      const anyChildSelected = item.children.some((child:any) => checkedKeys?.value.includes(child.id));
+      item.isCheck = isSelected || anyChildSelected;
+    } else {
+      item.isCheck = isSelected;
+    }
   });
+
   expandedKeys.value = [...expandedKeys.value, ...checkedKeys.value];
 });
 /**

@@ -52,6 +52,7 @@ const {crudOptions} = createCrudOptions({
 });
 
 // 初始化crud配置
+//@ts-ignore
 const {resetCrudOptions}= useCrud({crudExpose:crudExpose, crudOptions:crudOptions});
 
 // 页面打开后获取列表数据
