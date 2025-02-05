@@ -11,7 +11,7 @@
       <a-row>
         <a-col :span="10">
           <div>
-            当前授权角色：
+            {{ $t('system.N00187') }}：
             <a-tag color="purple">{{ props.roleName }}</a-tag>
           </div>
         </a-col>
