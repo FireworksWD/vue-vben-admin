@@ -45,7 +45,7 @@ const getLastMsg = async () => {
   const res = await requestClient.get(apiPrefix + 'get_self_receive/?page=1&limit=10&is_read=False')
   const {data} = res
   state.newsList = data.map((item: any) => ({
-    avatar: item?.avatarUrl || preferences.app.defaultAvatar || '',  // 头像，如果没有则为空
+    avatar: item?.send_user_info?.avatar || preferences.app.defaultAvatar || '',  // 头像，如果没有则为空
     date: item?.create_datetime,  // 格式化日期
     isRead: item?.is_read,  // 判断是否已读
     message: item?.content,  // 消息内容
