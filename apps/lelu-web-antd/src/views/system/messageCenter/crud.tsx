@@ -53,7 +53,9 @@ export default function({ crudExpose, context }: CreateCrudOptionsProps): Create
     "#108ee9"
   ];
   const tagColor = (value: any) => {
-    const hash: any = Array.from(value).reduce((acc: any, char: any) => acc + char.charCodeAt(0), 0);
+    const hash: any = (typeof value === "string" || Array.isArray(value))
+      ? Array.from(value).reduce((acc: any, char: any) => acc + char.charCodeAt(0), 0)
+      : 0;
     return colors[hash % colors.length];
   };
   return {
@@ -176,7 +178,7 @@ export default function({ crudExpose, context }: CreateCrudOptionsProps): Create
           }
         },
         send_user_info: {
-          title: $t('system.N00724'),
+          title: $t("system.N00724"),
           type: "text",
           form: {
             show: false
@@ -185,7 +187,7 @@ export default function({ crudExpose, context }: CreateCrudOptionsProps): Create
             cellRender({ row }) {
               return (
                 <a-tag
-                  color={tagColor(row.send_user_info?.username)}>{row.send_user_info?.username}</a-tag>
+                  color={tagColor(row?.send_user_info?.username)}>{row?.send_user_info?.username}</a-tag>
               );
             },
             show: computed(() => {
