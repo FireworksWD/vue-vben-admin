@@ -1,11 +1,14 @@
-import { createApp } from "vue";
+import { createApp, watchEffect } from "vue";
 
 import { registerAccessDirective } from "@vben/access";
+import { initTippy } from "@vben/common-ui";
+import { MotionPlugin } from "@vben/plugins/motion";
+import { preferences } from "@vben/preferences";
 import { initStores } from "@vben/stores";
 import "@vben/styles";
 import "@vben/styles/antd";
 import fastCrud from "./crudSettings";
-import { setupI18n } from "#/locales";
+import { $t, setupI18n } from "#/locales";
 import Antd from "ant-design-vue";
 
 import { initComponentAdapter } from "./adapter/component";
@@ -15,6 +18,7 @@ import { Icon } from "@iconify/vue";
 import { registerIcons } from "./iconSettings";
 // 自动注册插件
 import { scanAndInstallPlugins } from "#/views/plugins";
+import { useTitle } from "@vueuse/core";
 
 async function bootstrap(namespace: string) {
   // 初始化组件适配器
@@ -37,11 +41,28 @@ async function bootstrap(namespace: string) {
   // 安装权限指令
   registerAccessDirective(app);
 
+  // 初始化 tippy
+  initTippy(app);
+
   // 配置路由及路由守卫
   app.use(router);
+
+  // 配置Motion插件
+  app.use(MotionPlugin);
+
   // @ts-ignore
   app.use(fastCrud);
   app.use(Antd);
+
+  // 动态更新标题
+  watchEffect(() => {
+    if (preferences.app.dynamicTitle) {
+      const routeTitle = router.currentRoute.value.meta?.title;
+      const pageTitle =
+        (routeTitle ? `${$t(routeTitle)} - ` : "") + preferences.app.name;
+      useTitle(pageTitle);
+    }
+  });
 
   app.mount("#app");
 }
