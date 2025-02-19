@@ -9,12 +9,13 @@
 </template>
 
 <script lang="ts" setup name="downloadCenter">
-import {onMounted} from 'vue';
+import { onMounted } from "vue";
 
-import {useFs} from '@fast-crud/fast-crud';
-import {createCrudOptions} from './crud';
+import { useFs } from "@fast-crud/fast-crud";
+import { createCrudOptions } from "./crud";
 
-const {crudBinding, crudRef, crudExpose} = useFs({createCrudOptions, context:null});
+//@ts-ignore
+const { crudBinding, crudRef, crudExpose } = useFs({ createCrudOptions, context: null });
 
 // 页面打开后获取列表数据
 onMounted(async () => {
