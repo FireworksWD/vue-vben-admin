@@ -1,18 +1,19 @@
-import type {Recordable} from '@vben/types';
+import type { Recordable } from "@vben/types";
 
-import {ref} from 'vue';
-import {useRouter} from 'vue-router';
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
-import {DEFAULT_HOME_PATH, LOGIN_PATH} from '@vben/constants';
-import {resetAllStores, useAccessStore, useUserStore} from '@vben/stores';
+import { DEFAULT_HOME_PATH, LOGIN_PATH } from "@vben/constants";
+import { resetAllStores, useAccessStore, useUserStore } from "@vben/stores";
 
-import {notification} from 'ant-design-vue';
-import {defineStore} from 'pinia';
+import { notification, message } from "ant-design-vue";
+import { defineStore } from "pinia";
 
-import {getUserInfoApi, loginApi, logoutApi} from '#/api';
-import {$t} from '#/locales';
+import { getUserInfoApi, loginApi, logoutApi } from "#/api";
+import { $t } from "#/locales";
+import { formatAxis } from "#/utils/formatTime";
 
-export const useAuthStore = defineStore('auth', () => {
+export const useAuthStore = defineStore("auth", () => {
   const accessStore = useAccessStore();
   const userStore = useUserStore();
   const router = useRouter();
@@ -23,10 +24,11 @@ export const useAuthStore = defineStore('auth', () => {
    * 异步处理登录操作
    * Asynchronously handle the login process
    * @param params 登录表单数据
+   * @param onSuccess
    */
   async function authLogin(
     params: Recordable<any>,
-    onSuccess?: () => Promise<void> | void,
+    onSuccess?: () => Promise<void> | void
   ) {
     // 异步处理用户登录操作并获取 accessToken
     let userInfo;
@@ -35,7 +37,7 @@ export const useAuthStore = defineStore('auth', () => {
       loginLoading.value = true;
       // const { accessToken } = await loginApi(params);
       const res = await loginApi(params);
-      user = res.data
+      user = res.data;
 
 
       // 如果成功获取到 accessToken
@@ -58,12 +60,22 @@ export const useAuthStore = defineStore('auth', () => {
             ? await onSuccess?.()
             : await router.push(DEFAULT_HOME_PATH);
         }
+        // 时间获取
+        const currentTime = computed(() => {
+          return formatAxis(new Date());
+        });
 
         if (userInfo?.username) {
-          notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.username}`,
-            duration: 3,
-            message: $t('authentication.loginSuccess'),
+          // notification.success({
+          //   description: `${$t("authentication.loginSuccessDesc")}:${userInfo?.username}`,
+          //   duration: 3,
+          //   // message: $t("authentication.loginSuccess"),
+          //   message: currentTime.value,
+          //   placement: "top"
+          // });
+          message.success({
+            content: `${currentTime.value},${$t("authentication.loginSuccessDesc")}:${userInfo?.username}`,
+            duration: 4
           });
         }
       }
@@ -72,7 +84,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-      userInfo,
+      userInfo
     };
   }
 
@@ -90,9 +102,9 @@ export const useAuthStore = defineStore('auth', () => {
       path: LOGIN_PATH,
       query: redirect
         ? {
-            redirect: encodeURIComponent(router.currentRoute.value.fullPath),
-          }
-        : {},
+          redirect: encodeURIComponent(router.currentRoute.value.fullPath)
+        }
+        : {}
     });
   }
 
@@ -113,6 +125,6 @@ export const useAuthStore = defineStore('auth', () => {
     authLogin,
     fetchUserInfo,
     loginLoading,
-    logout,
+    logout
   };
 });
