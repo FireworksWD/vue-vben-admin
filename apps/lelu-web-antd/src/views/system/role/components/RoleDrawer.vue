@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Page } from "@vben/common-ui";
+import { $t } from "@vben/locales";
 import { Splitpanes, Pane } from "splitpanes";
 import "splitpanes/dist/splitpanes.css";
 import { UserSwitchOutlined } from "@ant-design/icons-vue";
@@ -36,9 +37,9 @@ const handleUsers = () => {
       :width="'60%'">
       <template #title>
         <div>
-          当前授权角色：
+          {{$t('system.N00187')}}：
           <a-tag style="margin-right: 20px" color="green">{{ RoleDrawer.roleName }}</a-tag>
-          授权人员：
+          {{$t('system.N00728')}}：
           <a-button size="small" :icon="h(UserSwitchOutlined)" @click="handleUsers">
             {{ RoleDrawer.users.length }}
           </a-button>
@@ -52,21 +53,21 @@ const handleUsers = () => {
         </pane>
         <pane min-size="20">
           <div class="pane-box">
-<!--            <a-radio-group v-model:value="activeName"  button-style="solid" animated>-->
-<!--              <a-radio-button value="first">接口权限</a-radio-button>-->
-<!--              <a-radio-button value="second">列字段权限</a-radio-button>-->
-<!--            </a-radio-group>-->
-<!--            <div v-if="activeName === 'first'" style="margin-top: 20px">-->
-<!--              <MenuBtnCom />-->
-<!--            </div>-->
-<!--            <div v-if="activeName === 'second'" style="margin-top: 14px">-->
-<!--              <MenuFieldCom />-->
-<!--            </div>-->
+            <!--            <a-radio-group v-model:value="activeName"  button-style="solid" animated>-->
+            <!--              <a-radio-button value="first">接口权限</a-radio-button>-->
+            <!--              <a-radio-button value="second">列字段权限</a-radio-button>-->
+            <!--            </a-radio-group>-->
+            <!--            <div v-if="activeName === 'first'" style="margin-top: 20px">-->
+            <!--              <MenuBtnCom />-->
+            <!--            </div>-->
+            <!--            <div v-if="activeName === 'second'" style="margin-top: 14px">-->
+            <!--              <MenuFieldCom />-->
+            <!--            </div>-->
             <a-tabs v-model:activeKey="activeName" class="demo-tabs" animated>
-              <a-tab-pane key="first" tab="接口权限">
+              <a-tab-pane key="first" :tab="$t('system.N00725')">
                 <MenuBtnCom />
               </a-tab-pane>
-              <a-tab-pane key="second" tab="列字段权限">
+              <a-tab-pane key="second" :tab="$t('system.N00726')">
                 <MenuFieldCom />
               </a-tab-pane>
             </a-tabs>
@@ -75,7 +76,7 @@ const handleUsers = () => {
       </splitpanes>
     </a-drawer>
 
-    <a-modal v-model:open="dialogVisible" title="授权用户" :close-on-click-modal="false"
+    <a-modal v-model:open="dialogVisible" :title="$t('system.N00727')" :close-on-click-modal="false"
              :footer="null" width="800px">
       <RoleUsersCom />
     </a-modal>

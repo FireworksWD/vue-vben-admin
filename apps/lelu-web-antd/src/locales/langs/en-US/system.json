@@ -721,5 +721,16 @@
   "N00721": "Terms Link",
   "N00722": "Please enter the terms link",
   "N00723": "Please enter a small website icon",
-  "N00724": "Sender"
+  "N00724": "Sender",
+  "N00725": "Interface permissions",
+  "N00726": "Column field permissions",
+  "N00727": "Authorized Users",
+  "N00728": "Authorized Personnel",
+  "N00729": "Only my data permissions",
+  "N00730": "This department and the following data permissions",
+  "N00731": "Data permissions of the department",
+  "N00732": "Full data permissions",
+  "N00733": "Customize data permissions",
+  "N00734": "Unauthorized Users",
+  "N00735": "Authorized Users"
 }

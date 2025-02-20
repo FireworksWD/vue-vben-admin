@@ -39,20 +39,12 @@ const showLeafIcon = ref(false);
  * 数据权限范围
  */
 const dataPermissionRange = ref([
-  { label: "仅本人数据权限", value: 0 },
-  { label: "本部门及以下数据权限", value: 1 },
-  { label: "本部门数据权限", value: 2 },
-  { label: "全部数据权限", value: 3 },
-  { label: "自定数据权限", value: 4 }
+  { label: $t("system.N00729"), value: 0 },
+  { label: $t("system.N00730"), value: 1 },
+  { label: $t("system.N00731"), value: 2 },
+  { label: $t("system.N00732"), value: 3 },
+  { label: $t("system.N00733"), value: 4 }
 ]);
-/**
- * 自定义数据权限的部门树配置
- */
-const defaultTreeProps = {
-  children: "children",
-  label: "name",
-  value: "id"
-};
 
 /**
  * 自定数据权限下拉选择事件
@@ -139,7 +131,7 @@ onMounted(async () => {
 
 <template>
   <div class="pccm-item" v-if="RoleMenuBtn.$state.length > 0">
-    <div class="menu-form-alert">配置操作功能接口权限，配置数据权限点击小齿轮</div>
+    <div class="menu-form-alert">{{ $t('system.N00534') }},{{ $t('system.N00536') }}</div>
     <div class="checkbox-container">
       <a-checkbox
         v-for="btn in RoleMenuBtn.$state"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { message } from "ant-design-vue";
+import { $t } from "@vben/locales";
 import { RoleDrawerStores } from "../stores/RoleDrawerStores";
 import { RoleMenuFieldStores, RoleMenuFieldHeaderStores } from "../stores/RoleMenuFieldStores";
 import { setRoleMenuField } from "./api";
@@ -24,14 +25,14 @@ const handleSaveField = async () => {
 <template>
   <div class="pccm-item" v-if="RoleMenuField.$state.length > 0">
     <div class="menu-form-alert">
-      <a-button size="small" @click="handleSaveField">保存</a-button>
-      配置数据列字段权限
+      <a-button size="small" @click="handleSaveField">{{ $t("system.N00580") }}</a-button>
+      {{ $t("system.N00535")}}
     </div>
 
     <ul class="columns-list">
       <li class="columns-head">
         <div class="width-txt">
-          <span>字段</span>
+          <span>{{ $t("system.N00144")}}</span>
         </div>
         <div v-for="(head, hIndex) in RoleMenuFieldHeader.$state" :key="hIndex" class="width-check">
           <a-checkbox v-model:checked="head.checked"

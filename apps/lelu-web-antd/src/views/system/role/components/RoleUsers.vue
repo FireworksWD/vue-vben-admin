@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { message } from "ant-design-vue";
+import { $t } from "@vben/locales";
 import { RoleDrawerStores } from "../stores/RoleDrawerStores";
 import { RoleUsersStores } from "../stores/RoleUsersStores";
 import { setRoleUsers } from "./api";
@@ -30,7 +31,7 @@ const filterOption = (inputValue: string, option: any) => {
   <a-transfer
     v-model:target-keys="RoleUsers.$state.right_users"
     :data-source="RoleUsers.$state.all_users"
-    :titles="['未授权用户', '已授权用户']"
+    :titles="[` ${$t('system.N00734')}`, ` ${$t('system.N00735')}`]"
     show-search
     :filter-option="filterOption"
     :render="(item:any) => item.name"
