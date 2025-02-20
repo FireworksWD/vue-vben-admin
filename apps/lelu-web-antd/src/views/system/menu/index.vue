@@ -146,6 +146,7 @@ const onTabChange = (value: string) => {
       </a-col>
     </a-row>
     <a-drawer
+      :maskClosable="false"
       v-model:open="drawerVisible"
       :title="$t('system.N00410')" direction="rtl"
       :close-on-click-modal="false"

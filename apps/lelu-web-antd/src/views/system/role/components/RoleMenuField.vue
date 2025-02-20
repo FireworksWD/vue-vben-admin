@@ -62,10 +62,20 @@ const handleSaveField = async () => {
   .menu-form-alert {
     color: #fff;
     line-height: 24px;
-    padding: 8px 16px;
+    padding: 12px 20px; /* 稍微增加内边距，使内容不那么拥挤 */
     margin-bottom: 20px;
     border-radius: 4px;
-    background-color: #409EFFFF;
+    background-color: #40a9ff; /* 淡蓝色，避免太刺眼 */
+    border: 1px solid #1890ff; /* 边框加上和背景色稍深的蓝色 */
+    box-shadow: 0 2px 8px rgba(24, 144, 255, 0.2); /* 微妙的阴影，提升层次感 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+  }
+
+  /* 当鼠标悬浮时 */
+  .menu-form-alert:hover {
+    background-color: #1890ff; /* 悬浮时的背景色变为深蓝色 */
+    border-color: #1890ff; /* 悬浮时边框的颜色变为深蓝色 */
+    box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3); /* 更强的阴影效果 */
   }
 
   .menu-form-btn {
@@ -86,11 +96,11 @@ const handleSaveField = async () => {
 
   .columns-list {
     .width-txt {
-      width: 200px;
+      width: 300px; /* 增加列宽度 */
     }
 
     .width-check {
-      width: 100px;
+      width: 200px; /* 增加列宽度 */
     }
 
     .width-icon {
@@ -125,4 +135,5 @@ const handleSaveField = async () => {
     }
   }
 }
+
 </style>
