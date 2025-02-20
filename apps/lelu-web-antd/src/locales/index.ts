@@ -1,29 +1,31 @@
-import type { LocaleSetupOptions, SupportedLanguagesType } from '@vben/locales';
-import type { Locale } from 'ant-design-vue/es/locale';
+import type { LocaleSetupOptions, SupportedLanguagesType } from "@vben/locales";
+import type { Locale } from "ant-design-vue/es/locale";
 
-import type { App } from 'vue';
-import { ref } from 'vue';
+import type { App } from "vue";
+import { ref } from "vue";
 
 import {
   $t,
   setupI18n as coreSetup,
-  loadLocalesMapFromDir,
-} from '@vben/locales';
-import { preferences } from '@vben/preferences';
+  loadLocalesMapFromDir
+} from "@vben/locales";
+import { preferences } from "@vben/preferences";
 
-import antdEnLocale from 'ant-design-vue/es/locale/en_US';
-import antdDefaultLocale from 'ant-design-vue/es/locale/zh_CN';
-import antdJPLocale from 'ant-design-vue/es/locale/ja_JP';
-import dayjs from 'dayjs';
+import antdEnLocale from "ant-design-vue/es/locale/en_US";
+import antdDefaultLocale from "ant-design-vue/es/locale/zh_CN";
+import antdJPLocale from "ant-design-vue/es/locale/ja_JP";
+import antdVNLocale from "ant-design-vue/es/locale/vi_VN";
+import dayjs from "dayjs";
 
 const antdLocale = ref<Locale>(antdDefaultLocale);
 
-const modules = import.meta.glob('./langs/**/*.json');
+const modules = import.meta.glob("./langs/**/*.json");
 
 const localesMap = loadLocalesMapFromDir(
   /\.\/langs\/([^/]+)\/(.*)\.json$/,
-  modules,
+  modules
 );
+
 /**
  * 加载应用特有的语言包
  * 这里也可以改造为从服务端获取翻译数据
@@ -32,7 +34,7 @@ const localesMap = loadLocalesMapFromDir(
 async function loadMessages(lang: SupportedLanguagesType) {
   const [appLocaleMessages] = await Promise.all([
     localesMap[lang]?.(),
-    loadThirdPartyMessage(lang),
+    loadThirdPartyMessage(lang)
   ]);
   return appLocaleMessages?.default;
 }
@@ -52,21 +54,21 @@ async function loadThirdPartyMessage(lang: SupportedLanguagesType) {
 async function loadDayjsLocale(lang: SupportedLanguagesType) {
   let locale;
   switch (lang) {
-    case 'en-US': {
-      locale = await import('dayjs/locale/en');
+    case "en-US": {
+      locale = await import("dayjs/locale/en");
       break;
     }
-    case 'zh-CN': {
-      locale = await import('dayjs/locale/zh-cn');
+    case "zh-CN": {
+      locale = await import("dayjs/locale/zh-cn");
       break;
     }
-    case 'ja-JP': {
-      locale = await import('dayjs/locale/ja');
+    case "ja-JP": {
+      locale = await import("dayjs/locale/ja");
       break;
     }
     // 默认使用英语
     default: {
-      locale = await import('dayjs/locale/en');
+      locale = await import("dayjs/locale/en");
     }
   }
   if (locale) {
@@ -82,16 +84,20 @@ async function loadDayjsLocale(lang: SupportedLanguagesType) {
  */
 async function loadAntdLocale(lang: SupportedLanguagesType) {
   switch (lang) {
-    case 'en-US': {
+    case "en-US": {
       antdLocale.value = antdEnLocale;
       break;
     }
-    case 'zh-CN': {
+    case "zh-CN": {
       antdLocale.value = antdDefaultLocale;
       break;
     }
-    case 'ja-JP': {
+    case "ja-JP": {
       antdLocale.value = antdJPLocale;
+      break;
+    }
+    case "vi-VN": {
+      antdLocale.value = antdVNLocale;
       break;
     }
   }
@@ -102,7 +108,7 @@ async function setupI18n(app: App, options: LocaleSetupOptions = {}) {
     defaultLocale: preferences.app.locale,
     loadMessages,
     missingWarn: !import.meta.env.PROD,
-    ...options,
+    ...options
   });
 }
 
