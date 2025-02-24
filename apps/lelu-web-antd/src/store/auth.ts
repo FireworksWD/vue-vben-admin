@@ -50,7 +50,6 @@ export const useAuthStore = defineStore("auth", () => {
         //   fetchUserInfo(),
         //   getAccessCodesApi(),
         // ]);
-        userInfo = await fetchUserInfo();
         // accessStore.setAccessCodes(accessCodes);
 
         if (accessStore.loginExpired) {
@@ -64,7 +63,7 @@ export const useAuthStore = defineStore("auth", () => {
         const currentTime = computed(() => {
           return formatAxis(new Date());
         });
-
+        userInfo = await fetchUserInfo();
         if (userInfo?.username) {
           // notification.success({
           //   description: `${$t("authentication.loginSuccessDesc")}:${userInfo?.username}`,
