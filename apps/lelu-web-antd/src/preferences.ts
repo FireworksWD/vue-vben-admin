@@ -12,4 +12,7 @@ export const overridesPreferences = defineOverridesPreferences({
     loginExpiredMode: 'modal',
     layout: "header-mixed-nav"
   },
+  theme: {
+    mode: "light"
+  }
 });
