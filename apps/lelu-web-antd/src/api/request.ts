@@ -1,30 +1,30 @@
 /**
  * 该文件可自行根据业务逻辑进行调整
  */
-import type {HttpResponse} from '@vben/request';
+import type { HttpResponse } from "@vben/request";
 
-import {useAppConfig} from '@vben/hooks';
-import {preferences} from '@vben/preferences';
+import { useAppConfig } from "@vben/hooks";
+import { preferences } from "@vben/preferences";
 import {
   authenticateResponseInterceptor,
   errorMessageResponseInterceptor,
-  RequestClient,
-} from '@vben/request';
-import {resetAllStores, useAccessStore} from '@vben/stores';
+  RequestClient
+} from "@vben/request";
+import { resetAllStores, useAccessStore } from "@vben/stores";
 
-import {message} from 'ant-design-vue';
+import { message } from "ant-design-vue";
 
-import {useAuthStore} from '#/store';
+import { useAuthStore } from "#/store";
 
-import {refreshTokenApi} from './core';
-import {LOGIN_PATH} from "@vben/constants";
-import {useRouter} from "vue-router";
+import { refreshTokenApi } from "./core";
+import { LOGIN_PATH } from "@vben/constants";
+import { useRouter } from "vue-router";
 
-const {apiURL} = useAppConfig(import.meta.env, import.meta.env.PROD);
+const { apiURL } = useAppConfig(import.meta.env, import.meta.env.PROD);
 
 function createRequestClient(baseURL: string) {
   const client = new RequestClient({
-    baseURL,
+    baseURL
   });
 
   /**
@@ -37,7 +37,7 @@ function createRequestClient(baseURL: string) {
     accessStore.setAccessToken(null);
     // && accessStore.isAccessChecked
     if (
-      preferences.app.loginExpiredMode === 'modal' && accessStore.isAccessChecked
+      preferences.app.loginExpiredMode === "modal" && accessStore.isAccessChecked
     ) {
       accessStore.setLoginExpired(true);
     } else {
@@ -50,8 +50,8 @@ function createRequestClient(baseURL: string) {
       await router.replace({
         path: LOGIN_PATH,
         query: {
-          redirect: encodeURIComponent(router.currentRoute.value.fullPath),
-        },
+          redirect: encodeURIComponent(router.currentRoute.value.fullPath)
+        }
       });
     }
   }
@@ -77,17 +77,17 @@ function createRequestClient(baseURL: string) {
       const accessStore = useAccessStore();
 
       config.headers.Authorization = formatToken(accessStore.accessToken);
-      config.headers['Accept-Language'] = preferences.app.locale;
+      config.headers["Accept-Language"] = preferences.app.locale;
       return config;
-    },
+    }
   });
 
   // response数据解构
   client.addResponseInterceptor<HttpResponse>({
     fulfilled: (response: any) => {
-      const {data: responseData, status} = response;
+      const { data: responseData, status } = response;
 
-      const {code} = responseData;
+      const { code } = responseData;
 
       if ((status >= 200 && status < 400 && code === 2000) || responseData.swagger !== undefined) {
         return responseData;
@@ -95,8 +95,8 @@ function createRequestClient(baseURL: string) {
       if (code === undefined && (status >= 200 && status < 400)) {
         return response;
       }
-      throw Object.assign({}, response, {response});
-    },
+      throw Object.assign({}, response, { response });
+    }
   });
 
   // token过期的处理
@@ -106,8 +106,8 @@ function createRequestClient(baseURL: string) {
       doReAuthenticate,
       doRefreshToken,
       enableRefreshToken: preferences.app.enableRefreshToken,
-      formatToken,
-    }),
+      formatToken
+    })
   );
 
   // 通用的错误处理,如果没有进入上面的错误处理逻辑，就会进入这里
@@ -115,24 +115,25 @@ function createRequestClient(baseURL: string) {
     errorMessageResponseInterceptor(async (msg: string, error) => {
       // 这里可以根据业务进行定制,你可以拿到 error 内的信息进行定制化处理，根据不同的 code 做不同的提示，而不是直接使用 message.error 提示 msg
       // 当前mock接口返回的错误字段是 error 或者 message
-      const err: string = error?.toString?.() ?? '';
+      const err: string = error?.toString?.() ?? "";
       const responseData = error?.response?.data ?? {};
       const code = error?.response?.data.code;
-      let errorMessage = responseData?.error ?? responseData?.msg ?? '';
+      let errorMessage = responseData?.error ?? responseData?.msg ?? "";
 // 如果 errorMessage 是数组，取其第一个元素
       if (Array.isArray(errorMessage) && errorMessage.length > 0 && errorMessage[0]) {
-        errorMessage = errorMessage[0]?.value ?? '';
-      } else if (typeof errorMessage === 'object' && errorMessage !== null && 'detail' in errorMessage) {
+        errorMessage = errorMessage[0]?.value ?? "";
+      } else if (typeof errorMessage === "object" && errorMessage !== null && "detail" in errorMessage) {
         // 如果是对象，取 `detail`
-        errorMessage = errorMessage.detail ?? '';
+        errorMessage = errorMessage.detail ?? "";
       }
       // 如果没有错误信息，则会根据状态码进行提示
       if (code === 401) {
-        message.error('身份认证失败，请重新登录', 5);
+        message.error("身份认证失败，请重新登录", 5);
+        await doReAuthenticate();
       } else {
         message.error(errorMessage || msg, 5);
       }
-    }),
+    })
   );
 
 
@@ -141,7 +142,7 @@ function createRequestClient(baseURL: string) {
 
 export const requestClient = createRequestClient(apiURL);
 
-export const baseRequestClient = new RequestClient({baseURL: apiURL});
+export const baseRequestClient = new RequestClient({ baseURL: apiURL });
 
 /**
  * 下载文件
@@ -151,34 +152,34 @@ export const baseRequestClient = new RequestClient({baseURL: apiURL});
  * @param filename
  * @param config
  */
-export const downloadFile = async function (url: string, {
+export const downloadFile = async function(url: string, {
   params,
   method,
-  filename = '文件导出',
+  filename = "文件导出",
   ...config
 }: any) {
   try {
     const res: any = await requestClient.request(url, {
       params: params,
       method: method,
-      responseType: 'blob',
-      ...config,
-    })
+      responseType: "blob",
+      ...config
+    });
     if (res) {
-      const xlsxName = decodeURIComponent(res.headers['content-disposition'].split('=')[1])
-      const fileName = xlsxName || `${filename}.xlsx`
+      const xlsxName = decodeURIComponent(res.headers["content-disposition"].split("=")[1]);
+      const fileName = xlsxName || `${filename}.xlsx`;
 
-      const blob = new Blob([res.data], {type: 'charset=utf-8'})
-      const link = document.createElement('a')
-      link.download = fileName
-      link.style.display = 'none'
-      link.href = URL.createObjectURL(blob)
-      document.body.appendChild(link)
-      link.click()
-      URL.revokeObjectURL(link.href) // 释放URL 对象0
-      document.body.removeChild(link)
+      const blob = new Blob([res.data], { type: "charset=utf-8" });
+      const link = document.createElement("a");
+      link.download = fileName;
+      link.style.display = "none";
+      link.href = URL.createObjectURL(blob);
+      document.body.appendChild(link);
+      link.click();
+      URL.revokeObjectURL(link.href); // 释放URL 对象0
+      document.body.removeChild(link);
     }
   } catch (err) {
     // console.error(err);
   }
-}
+};
