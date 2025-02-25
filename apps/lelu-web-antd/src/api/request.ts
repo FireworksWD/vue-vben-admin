@@ -39,6 +39,7 @@ function createRequestClient(baseURL: string) {
     if (
       preferences.app.loginExpiredMode === "modal" && accessStore.isAccessChecked
     ) {
+      resetAllStores();
       accessStore.setLoginExpired(true);
     } else {
       // await authStore.logout();
