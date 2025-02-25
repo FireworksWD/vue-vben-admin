@@ -11,7 +11,7 @@ export default defineConfig(async () => {
             // rewrite: (path) => path.replace(/^\/api/, ''),
             rewrite: (path) => path.replace(/^\/media/, "/media"),
             // mock代理目标地址
-            target: "http://127.0.0.1:8008/media",
+            target: "http://127.0.0.1:8008",
             ws: true
           }
         }
