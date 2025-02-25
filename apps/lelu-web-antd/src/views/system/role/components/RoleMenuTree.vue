@@ -109,5 +109,31 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
+.tree-title {
+  display: inline-block;
+  padding: 2px 4px;
+  cursor: pointer;
+  border-radius: 4px; /* 圆角效果 */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 平滑过渡效果 */
+}
 
+.tree-title:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* 悬停时的背景颜色 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 悬停时的阴影效果 */
+}
+
+.tree-title.hovered {
+  background-color: #7cb305; /* 选中的节点背景颜色 */
+  color: white; /* 选中时文字变白 */
+  font-weight: bold; /* 选中时加粗字体 */
+}
+
+.tree-title:focus {
+  outline: none; /* 去除默认焦点边框 */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* 焦点时添加蓝色边框 */
+}
+
+.tree-title:active {
+  background-color: #6b9c05; /* 点击时的背景颜色 */
+}
 </style>
