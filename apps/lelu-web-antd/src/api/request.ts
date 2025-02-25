@@ -39,12 +39,12 @@ function createRequestClient(baseURL: string) {
     if (
       preferences.app.loginExpiredMode === "modal" && accessStore.isAccessChecked
     ) {
-      resetAllStores();
       accessStore.setLoginExpired(true);
     } else {
+      resetAllStores();
+      window.location.reload();
       // await authStore.logout();
       const router = useRouter();
-      resetAllStores();
       accessStore.setLoginExpired(false);
 
       // 回登录页带上当前路由地址
@@ -129,7 +129,6 @@ function createRequestClient(baseURL: string) {
       }
       // 如果没有错误信息，则会根据状态码进行提示
       if (code === 401) {
-        message.error("身份认证失败，请重新登录", 5);
         await doReAuthenticate();
       } else {
         message.error(errorMessage || msg, 5);
