@@ -4,7 +4,6 @@
  * @Created on: 2025/2/26 9:25
  * @Remark:
  **/
-
 const modules = import.meta.glob("../../../**/index.vue");
 const excludeDirs = ["components", "component", "plugins"];
 
@@ -19,7 +18,6 @@ const getAbsolutePath = (relativePath: any) => {
   processedPath = processedPath.replace(/\.vue$/, "");
   return processedPath;
 };
-
 
 // 递归扫描并过滤模块
 const getFilteredModules = (modules: any, excludeDirs: any) => {
@@ -36,21 +34,7 @@ const getFilteredModules = (modules: any, excludeDirs: any) => {
     return acc;
   }, []);
 };
-
 const processedModules = getFilteredModules(modules, excludeDirs);
-
-
-// const processedModules = filteredModules.map((path: any) => {
-//   let processedPath = path;
-//   // 去掉开头的 '/src/views/'
-//   processedPath = processedPath.replace(/^\/src\/views\//, "");
-//   // 去掉末尾的 '.vue'
-//   processedPath = processedPath.replace(/\.vue$/, "");
-//   return {
-//     label: processedPath,
-//     value: processedPath
-//   };
-// });
 
 export default processedModules;
 
