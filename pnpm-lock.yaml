@@ -647,17 +647,17 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1(vue@3.5.13(typescript@5.7.3))
       '@fast-crud/fast-crud':
-        specifier: ^1.24.2
-        version: 1.25.1(vue@3.5.13(typescript@5.7.3))
+        specifier: ^1.25.3
+        version: 1.25.3(vue@3.5.13(typescript@5.7.3))
       '@fast-crud/fast-extends':
-        specifier: ^1.24.2
-        version: 1.25.1(aws-crt@1.25.3)(vue@3.5.13(typescript@5.7.3))
+        specifier: ^1.25.3
+        version: 1.25.3(aws-crt@1.25.3)(vue@3.5.13(typescript@5.7.3))
       '@fast-crud/ui-antdv4':
-        specifier: ^1.24.2
-        version: 1.25.1
+        specifier: ^1.25.3
+        version: 1.25.3
       '@fast-crud/ui-interface':
-        specifier: ^1.24.2
-        version: 1.25.1
+        specifier: ^1.25.3
+        version: 1.25.3
       '@types/echarts':
         specifier: ^4.9.22
         version: 4.9.22
@@ -4027,17 +4027,17 @@ packages:
     resolution: {integrity: sha512-3qbjLv+fzuuCg3umxc9/7YjrEXNaKwHgmig949nfyaTx8eL4FAsvFbu+1JcFUj1YAXofhaDn6JdEUBTYuk0Ssw==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
-  '@fast-crud/fast-crud@1.25.1':
-    resolution: {integrity: sha512-Guoym52g1TO6IURxydQ6LbX29/3R9r+yrnt2dexAsQCOnfWAKoBk6fxkeBmqL/QlccTd+mNDBgbaBbinYVCBBQ==}
+  '@fast-crud/fast-crud@1.25.3':
+    resolution: {integrity: sha512-JUt9gDI99zL1HIz56wZjTPgn63syc5I3Y/m3SM8c8VeLZASPlnxQ5diN0uziE28T+hDBoXkBIBBgYFR2zkdy/g==}
 
-  '@fast-crud/fast-extends@1.25.1':
-    resolution: {integrity: sha512-BMp2n5yGZtcnjcu88nptbr7pj9eIkowPVjnsI0RnLAKAB90k8FlCnT4dMSyrzIHhcOaJ6bySs8GQMJPAgg7rNg==}
+  '@fast-crud/fast-extends@1.25.3':
+    resolution: {integrity: sha512-xaFLkRQa55PvmkVD4HROZA4Fe13Cicxx0wP25ePspzNuvJHq6FpntRReiaq3pfPiZVuD7EHyNuArdTroRBx3Pw==}
 
-  '@fast-crud/ui-antdv4@1.25.1':
-    resolution: {integrity: sha512-W7FRFVtOTZLLj81eeRca7n8f6SOeNKxOZTsqrC4LeoWeyLRsY+xcx7MR04u/hMM9JO72QwyleBZfz40Lr7+cqA==}
+  '@fast-crud/ui-antdv4@1.25.3':
+    resolution: {integrity: sha512-He390ar65urv/FGCCgdwkmD5gGUuGURFsirh+M+to/OD6G/De/eWLKE3NUa0dddwdSQEjd7ODEJO7F6FZVztRw==}
 
-  '@fast-crud/ui-interface@1.25.1':
-    resolution: {integrity: sha512-Ptmzd5/UMu9+9GBcqwxs3ZdMKz+HI/FqDUIQyCeO8MSyZ/PGr8VEatEicVL5N7Jb6lVHO50JGmbMJlNf5D/GlA==}
+  '@fast-crud/ui-interface@1.25.3':
+    resolution: {integrity: sha512-rVpFyM6zBVUH6bXyA2mEXb/UpY/QYKYXr5jJyU6aAzNgHOzEZiVji8FOmb9xB6TFc7mz1nqqY9mijw9SL2hbtA==}
 
   '@floating-ui/core@1.6.9':
     resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
@@ -14452,7 +14452,7 @@ snapshots:
 
   '@faker-js/faker@9.5.0': {}
 
-  '@fast-crud/fast-crud@1.25.1(vue@3.5.13(typescript@5.7.3))':
+  '@fast-crud/fast-crud@1.25.3(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@iconify/types': 2.0.0
       file-saver: 2.0.5
@@ -14462,7 +14462,7 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@fast-crud/fast-extends@1.25.1(aws-crt@1.25.3)(vue@3.5.13(typescript@5.7.3))':
+  '@fast-crud/fast-extends@1.25.3(aws-crt@1.25.3)(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@aws-sdk/client-s3': 3.750.0(aws-crt@1.25.3)
       '@aws-sdk/s3-request-presigner': 3.750.0
@@ -14492,9 +14492,9 @@ snapshots:
       - utf-8-validate
       - vue
 
-  '@fast-crud/ui-antdv4@1.25.1': {}
+  '@fast-crud/ui-antdv4@1.25.3': {}
 
-  '@fast-crud/ui-interface@1.25.1':
+  '@fast-crud/ui-interface@1.25.3':
     dependencies:
       lodash-es: 4.17.21
 
