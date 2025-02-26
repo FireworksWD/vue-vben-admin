@@ -4,7 +4,7 @@ import { Page } from "@vben/common-ui";
 
 import { ref, onMounted, reactive, defineAsyncComponent } from "vue";
 import { lazyLoadMenu, AddObj, UpdateObj } from "#/views/system/menu/api";
-import { Input, notification } from "ant-design-vue";
+import { notification } from "ant-design-vue";
 import type {
   MenuFormDataType,
   MenuTreeItemType,
@@ -12,6 +12,7 @@ import type {
 } from "#/views/system/menu/types";
 import type { TreeSelectProps } from "ant-design-vue";
 import type { Rule } from "ant-design-vue/es/form";
+import processedModules from "../FileScan";
 
 const MultipleIconPicker = defineAsyncComponent(() => import("../MultiIconPicker/MultiIconPicker.vue"));
 
@@ -232,16 +233,6 @@ onMounted(async () => {
 
       <a-form-item :label="$t('system.N00111')" name="icon">
         <MultipleIconPicker clearable v-model="menuFormData.icon" />
-        <!--        <Input-->
-        <!--          v-model:value="menuFormData.icon"-->
-        <!--          allow-clear-->
-        <!--          placeholder="点击这里选择图标"-->
-        <!--          style="width: 300px"-->
-        <!--        >-->
-        <!--          <template #addonAfter>-->
-        <!--            <IconPicker v-model="menuFormData.icon" prefix="mdi-light" type="icon" />-->
-        <!--          </template>-->
-        <!--        </Input>-->
       </a-form-item>
 
       <a-row>
@@ -304,15 +295,29 @@ onMounted(async () => {
         <a-form-item v-if="!menuFormData.is_catalog && !menuFormData.is_link"
                      :label="$t('system.N00389')"
                      name="component">
-          <a-auto-complete
+          <a-select
             class="w-full"
             v-model:value="menuFormData.component"
-            :fetch-suggestions="querySearch"
-            :trigger-on-focus="false"
-            clearable
-            :debounce="100"
+            :show-search="true"
             :placeholder="$t('system.N00509')"
-          />
+            clearable
+          >
+            <a-select-option v-for="item in processedModules" :key="item.value" :value="item.value">
+              <div style="display: flex; align-items: center;">
+                <Icon icon="circum:view-list" style="margin-right: 12px;"/>
+                {{ item.label }}
+              </div>
+            </a-select-option>
+          </a-select>
+          <!--          <a-auto-complete-->
+          <!--            class="w-full"-->
+          <!--            v-model:value="menuFormData.component"-->
+          <!--            :fetch-suggestions="querySearch"-->
+          <!--            :trigger-on-focus="false"-->
+          <!--            clearable-->
+          <!--            :debounce="100"-->
+          <!--            :placeholder="$t('system.N00509')"-->
+          <!--          />-->
         </a-form-item>
 
         <a-form-item v-if="!menuFormData.is_catalog && !menuFormData.is_link"
