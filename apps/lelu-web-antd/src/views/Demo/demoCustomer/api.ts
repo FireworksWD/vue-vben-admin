@@ -57,3 +57,10 @@ export function DelObj(id: DelReq) {
 export function BatchDelete(obj: any) {
   return requestClient.delete(apiPrefix + 'multiple_delete/', {data: {keys: obj}});
 }
+/**
+ * 获取列权限
+ * @constructor
+ */
+export function GetPermission() {
+  return requestClient.get(apiPrefix + 'field_permission/');
+}
