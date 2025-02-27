@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 import {$t} from '#/locales'
-import {defineProps, ref, watch} from 'vue'
+import {ref, watch} from 'vue'
 import {useDeptInfoStore} from '#/store/modules/dept'
 
 const props = defineProps({

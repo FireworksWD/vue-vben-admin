@@ -159,7 +159,7 @@
 import {$t} from '#/locales'
 import {Icon} from '@iconify/vue';
 import {requestClient} from '#/api/request';
-import {ref, h, defineEmits} from "vue";
+import {ref, h} from "vue";
 import {DeleteOutlined} from '@ant-design/icons-vue'
 import {getBaseURL} from '#/utils/baseUrl';
 import {useAccessStore} from "@vben/stores";
