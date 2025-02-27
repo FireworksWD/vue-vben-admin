@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { $t } from "#/locales";
-import { computed, defineProps, ref, watch, onMounted, onUnmounted } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 import type { VxeGridListeners, VxeGridProps } from "#/adapter/vxe-table";
 import { useVbenVxeGrid } from "#/adapter/vxe-table";
 import { Page } from "@vben/common-ui";
