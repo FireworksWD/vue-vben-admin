@@ -33,11 +33,14 @@ export const handleColumnPermission = async (func: Function, crudOptions: any, e
 
       // 如果列表不可见，则禁止在列设置中选择
       if (!res.data[key]["is_query"]) {
-        // 确保 column.show 和 column.columnSetDisabled 存在
-        item.column.show = item.column.show !== undefined ? item.column.show : false;
-        item.column.columnSetDisabled = item.column.columnSetDisabled !== undefined ? item.column.columnSetDisabled : true;
+        item.column.show = false;
+        item.column.columnSetDisabled = true;
         // 搜索框也关掉
-        item.search = { show: false };
+        if (!item.search) {
+          item.search = { show: false };
+        } else {
+          item.search.show = false;
+        }
       }
 
       // 设置 addForm 和 editForm 的显示状态
