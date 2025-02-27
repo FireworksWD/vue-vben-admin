@@ -88,7 +88,7 @@ export default function ({
       actionbar: {
         buttons: {
           add: {
-            show: auth('btn:Create')
+            show: auth('demo:Create')
           },
         }
       },
@@ -99,10 +99,10 @@ export default function ({
         buttons: {
           view: {},
           edit: {
-            show: auth('btn:Update')
+            show: auth('demo:Update')
           },
           remove: {
-            show: auth('btn:Delete')
+            show: auth('demo:Delete')
           },
         },
       },
