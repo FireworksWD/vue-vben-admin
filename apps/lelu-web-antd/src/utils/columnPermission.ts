@@ -36,11 +36,10 @@ export const handleColumnPermission = async (func: Function, crudOptions: any, e
         item.column.show = false;
         item.column.columnSetDisabled = true;
         // 搜索框也关掉
-        if (!item.search) {
-          item.search = { show: false };
-        } else {
+        if (item.search) {
           item.search.show = false;
         }
+
       }
 
       // 设置 addForm 和 editForm 的显示状态
