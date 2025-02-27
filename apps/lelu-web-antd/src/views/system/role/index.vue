@@ -35,8 +35,8 @@ onMounted(async () => {
         <a-tag size="small">{{ scope.row.url }}</a-tag>
       </template>
     </fs-crud>
-    <PermissionDrawerCom/>
   </fs-page>
+  <PermissionDrawerCom />
 </template>
 
 <style scoped lang="scss">
