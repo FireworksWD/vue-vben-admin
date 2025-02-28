@@ -82,7 +82,7 @@ export const createCrudOptions = function ({
       rowHandle: {
         //固定右侧
         fixed: 'right',
-        width: 250,
+        width: 180,
         buttons: {
           view: {
             show: false,
@@ -108,20 +108,20 @@ export const createCrudOptions = function ({
               title: $t('system.N00078'),
             },
           },
-          custom: {
-            text: 'reset',
-            type: 'primary',
-            show: auth('user:ResetPassword'),
-            tooltip: {
-              is: 'a-tooltip',
-              placement: 'top',
-              title: $t('system.N00538'),
-            },
-            click: (ctx: any) => {
-              const {row} = ctx;
-              context?.handleResetPwdOpen(row);
-            },
-          },
+          // custom: {
+          //   text: 'reset',
+          //   type: 'primary',
+          //   show: auth('user:ResetPassword'),
+          //   tooltip: {
+          //     is: 'a-tooltip',
+          //     placement: 'top',
+          //     title: $t('system.N00538'),
+          //   },
+          //   click: (ctx: any) => {
+          //     const {row} = ctx;
+          //     context?.handleResetPwdOpen(row);
+          //   },
+          // },
         },
       },
       columns: {
