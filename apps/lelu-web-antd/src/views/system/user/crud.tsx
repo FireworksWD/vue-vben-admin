@@ -150,7 +150,7 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
               Modal.confirm({
                 title: $t('system.N00366')+'?',
                 icon: createVNode(ExclamationCircleOutlined),
-                content: createVNode('div', {style: 'color:red;'}, 'Reset Password'),
+                content: createVNode('div', {style: 'color:red;'}, 'Reset Password: admin123456'),
                 onOk: async () => {
                   const {row} = ctx;
                   await resetToDefaultPasswordRequest(row)
