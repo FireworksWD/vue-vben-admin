@@ -148,7 +148,7 @@ export const createCrudOptions = function ({crudExpose}: CreateCrudOptionsProps)
             //@ts-ignore
             click: async (ctx: any) => {
               Modal.confirm({
-                title: '确定要重置密码?',
+                title: $t('system.N00366')+'?',
                 icon: createVNode(ExclamationCircleOutlined),
                 content: createVNode('div', {style: 'color:red;'}, 'Reset Password'),
                 onOk: async () => {
